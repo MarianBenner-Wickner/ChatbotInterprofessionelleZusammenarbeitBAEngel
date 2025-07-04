@@ -25,42 +25,66 @@ muss VOR erstmaligem Starten des Servers in die .env-Datei eingetragen werden (s
 
 ## Anleitung Installation auf lokalem Gerät:
 1.	Node.js auf Rechner installieren (https://nodejs.org)
-2.	Projekt von GitHub herunterladen
-  	   Am besten als Zip herunterladen und lokal entpacken
-3.	Im Ordner die .env.example in .env umbenennen
-   
-    a.	.env-Datei bearbeiten!
 
-  	    In der .env-Datei den API-Schlüssel für OpenAI unter OPENAI_API_KEY einfügen.
+    a.	Auf Seite -> Install Node.js klicken -> Je nach Betriebssystem den Installer herunterladen (z.B. Windows -> Windows Installer (.msi))
   	
-    b.	Ggf. Port ändern -> grundlegend erst einmal LocalHost 3000
-  	
-    c.	Ggf. ADMIN_HASH  anpassen (Grund-Passwort ist !InterProfAdmin2025)
-  	
-        Mit Hash Wert aus bcrypt
-  	
-            1.	In der Konsole node eingeben
-            2.	Dann require('bcrypt').hash('NeuesPasswort', 10, (err, hash) => console.log(hash));
-            3.	Auf der Konsole wird der neue Hash-Wert angezeigt, der für ADMIN_HASH in der env-Datei eingesetzt werden muss
-            4.	Verlassen node mit .exit oder zwei Mal Strg + C
-  	
-4.	Konsole öffnen und zu Ordner navigieren (z.B. Windows cd pfad/zum/projekt)
+    b.	Installationsdatei öffnen und Programm installieren
 
-        Abhängigkeiten vom Projekt über den Node Package Manager installieren (npm install)
-        - Darauf achten, dass der korrekte Ordner ausgewählt ist im Pfad
-        - Ordnerpfad muss zu Ordner mit package.json führen
-  	
-5.	Server starten (npm start)
+2.	Projekt herunterladen (Link)
    
-    a.	Bei erfolgreichem Starten läuft der Server unter localhost:3000 (über Browser http://localhost:3000 zu erreichen
+    a.	Am besten als Zip herunterladen
   	
-    b.	Bei Fehlermeldung Inhalte für Korrektur lesen
+    b.	Lokal entpacken
   	
-6.	Server stoppen (bei Bedarf)
+    c.	Den entpackten Ordner an den finalen Speicherort bewegen <br/>
+    - Bei der Ordnerstruktur darauf achten, dass im Oberordner bereits die server.js liegt. Wenn durch das Entpacken ein zusätzlicher Oberordner erstellt wird, kann dieser gelöscht und nur der Unterordner verwendet werden<br/>
+    -	Korrekte Ordnerstruktur: ChatbotInterprofessionelleZusammenarbeit/Projektunterordner<br/>
+    -	Falsche Ordnerstruktur: ChatbotInterprofessionelleZusammenarbeit/ ChatbotInterprofessionelleZusammenarbeit /Projektunterordner
+
+3.	Anpassungen am Projekt
    
-    a.	In der Eingabeaufforderung gleichzeitig „Strg“ und „C“ drücken
+    a.	WICHTIG: Im Ordner die .env.example in .env umbenennen
   	
-    b.	Bei Aufforderung „Batchvorgang abbrechen“ auf der Tastatur „J“ und Enter drücken
+    b.	.env-Datei bearbeiten <br/>
+      - In der .env-Datei den API-Schlüssel für OpenAI unter OPENAI_API_KEY einfügen.
+        
+    c.	Ggf. Port ändern -> grundlegend erst einmal LocalHost 3000
+
+  	
+4.	Konsole / Eingabeaufforderung öffnen
+   
+    a.	Ordner navigieren (z.B. Windows cd pfad/zum/projekt)<br/>
+    - Der Pfad kann kopiert werden, indem beim Ordner des Projektes mit Rechtsklick -> „Als Pfad kopieren“ ausgewählt wird<br/>
+    - In der Konsole dann cd und den kopierten Pfad eingeben
+      
+    b.	Abhängigkeiten vom Projekt über den Node Package Manager installieren<br/>
+     - In der Konsole eingeben: npm install<br/>
+        1.	Darauf achten, dass der korrekte Ordner ausgewählt ist im Pfad<br/>
+           - Ordnerpfad muss zu Ordner mit package.json führen
+        2.	Die Installation der Module kann je nach Rechner ein wenig dauern<br/>
+           - Am Ende steht in der Konsole eine Nachricht wie<br/>
+          	      „added 142 packages, and audited 143 packages in 13s<br/>
+                   27 packages are looking for funding <br/>
+                   run `npm fund` for details<br/>
+                    found 0 vulnerabilities“<br/>
+            
+    c.	Server starten 
+      - In der Konsole eingeben: npm start<br/>
+          1.	Bei erfolgreichem Starten läuft der Server unter localhost:3000 (über Browser http://localhost:3000 zu erreichen<br/>
+          2.	Bei Fehlermeldung Inhalte für Korrektur lesen
+             
+    d.	Server stoppen (bei Bedarf)<br/>
+      - In der Eingabeaufforderung gleichzeitig „Strg“ und „C“ drücken<br/>
+      - Bei Aufforderung „Batchvorgang abbrechen“ auf der Tastatur „J“ und Enter drücken
+        
+  5.	Optional: Admin-Passwort ändern -> Mit Hash Wert aus bcrypt<br/>
+      a.	Eingabeaufforderung öffnen<br/>
+      b.	Zum Ordnerpfad des Projektes navigieren (siehe Schritt 4)<br/>
+      c.	In der Konsole node eingeben<br/>
+      d.	Eingabe zum Ändern des Passworts:  require('bcrypt').hash('NeuesPasswort', 10, (err, hash) => console.log(hash));<br/>
+      e.	Auf der Konsole wird der neue Hash-Wert angezeigt, der für ADMIN_HASH in der env-Datei eingesetzt werden muss<br/>
+      f.	Verlassen node mit .exit oder zwei Mal Strg + C
+
 
 
 <br/>
