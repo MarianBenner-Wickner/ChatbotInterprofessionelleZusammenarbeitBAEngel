@@ -1,0 +1,28 @@
+{
+  "name": "webseitebachelorarbeit",
+  "version": "1.0.0",
+  "description": "Prototyp einer Webanwendung mit einer KI-Chatbot Anbindung für die BachelorArbeit.",
+  "main": "student.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "Jule Engel",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "better-sqlite3": "^11.10.0",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "openai": "^5.3.0"
+  }
+}

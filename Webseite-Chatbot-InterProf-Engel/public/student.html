@@ -1,0 +1,213 @@
+<!-- /public/student.html -->
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chatbot-Webanwendung</title>
+  <link rel="stylesheet" href="student.css" />
+</head>
+<body>
+  <div class="main-box">
+    <img src="images/logo.png" alt="Logo Ihrer Anwendung" class="site-logo">
+    <h1>Projekt Interprofessionelle Zusammenarbeit</h1>
+    <h1 class="main-title">KI-Chatbot zur Simulation von Studierenden </h1>
+
+    <!-- Einleitung -->
+    <section>
+      <h2 class="section-header">Einleitung</h2>
+    </section>
+    <section>
+      <p id="intro-toggle-trigger">
+        Dieser Bereich dient zur kurzen Einführung und Anleitung in die Funktionen des Chatbots. 
+        <br/>
+        <br/>
+        <strong>Bei erstmaliger Nutzung unbedingt vollständig durchlesen!</strong>
+        <br/>
+        <br/>
+        <i>Drücke dieses Feld an, um mehr Informationen ein- und auszublenden.</i>
+      </p>
+    </section>
+       
+    <section id="intro-toggle-section" class="hidden">
+      <h2>Einleitung</h2>
+      <p>
+        Diese Webanwendung stellt einen Prototypen dar, der im Rahmen einer Bachelor-Arbeit entwickelt wurde. Ziel ist es, die interprofessionelle Zusammenarbeit durch die Simulation
+        von Fachpersonen im Rahmen der Behandlungsplanung zu unterstützen. Die Nutzung erfolgt freiwillig und auf eigene Verantwortung. 
+        Fehler und Unstimmigkeiten bitte an die betreuenden Professor:innen melden – hierfür kann auch die Feedback-Funktion im unteren Bereich der Webseite genutzt werden.
+      </p>
+      <br/>
+
+      <h2>Ziel der Nutzung</h2>
+      <p>
+        Über diese Seite kann mit einem Chatbot interagiert werden, der Student:innen aus verschiedenen Fachgebieten simuliert. Er wurde dafür konzipiert, in der interprofessionellen Diskussion 
+        Rollen zu übernehmen, die in der realen Diskussion möglicherweise nicht besetzt sind. Der Bot basiert auf einem KI-Sprachmodell, das vorab mit Informationen zur Rolle 
+        sowie mit Patientendaten versorgt wird. Ziel ist es nicht, einen vollständigen Behandlungsplan zu erstellen, sondern Impulse zu geben, Fragen zu beantworten und das 
+        interprofessionelle Denken zu fördern. Sollte der Chatbot dennoch einen vollständigen Behandlungsplan erstellen, melde dies bitte.
+        Beachte, dass der Chatbot keinerlei Wissen über das Anamnesegespräch besitzt – Inhalte daraus müssen aktiv eingebracht werden.
+      </p>
+      <br/>
+
+      <h2>Funktionsweise</h2>
+      <p>
+        Um den Chatbot zu verwenden, wähle im Bereich „Chatfeld für Interaktion mit Chatbot“ zunächst eine Gruppe aus. Jede Gruppe kann zur gleichen Zeit nur von einer Person 
+        genutzt werden – stimme dich also bitte mit den anderen Studierenden ab. Danach wählst du die gewünschte Fachperson (Rolle) aus und kannst über das Textfeld Fragen 
+        stellen oder Diskussionen starten. Sollte kein aktiver Patient oder keine aktive Session angezeigt werden, informiere bitte die Betreuung.
+        <br/><br/>
+        Wenn der Chatverlauf zu Problemen führt, kann mit dem Button "Neuer Chat" ein neuer Chat für diese Gruppe erstellt werden. Dies kann auch sinnvoll sein, wenn die Antworten
+        des Chatbots sehr lange dauern, da der bisherige Chatverlauf zu groß geworden ist.
+      </p>
+      <br/>
+
+      <h2>Hinweise zum Umgang</h2>
+      <p>
+        Der Chatbot ist kein echter Gesprächspartner, sondern simuliert auf Basis statistischer Wahrscheinlichkeiten eine fachlich klingende Konversation. Die Antworten können 
+        fachlich inkorrekt, unvollständig oder irreführend sein. Prüfe deshalb alle Aussagen kritisch – sie ersetzen keine reale therapeutische oder medizinische Einschätzung. 
+        Inhalte aus dem Chat sollten nicht ohne eigene Prüfung in reale Kontexte übernommen werden. Du trägst die Verantwortung für die Interpretation der Antworten.
+        <br/>
+        Bitte beachte zudem, dass alle Chatverläufe <strong>gespeichert</strong> werden und später eingesehen werden können.
+      </p>
+      <br/>
+
+      <h2>Datenschutz</h2>
+      <p>
+        Bitte gib im Chat <strong>niemals persönliche oder vertrauliche Informationen</strong> ein – weder von dir noch von realen Personen. Die Anwendung dient ausschließlich 
+        der Arbeit mit den bereitgestellten, fiktiven Daten.
+      </p>
+    </section>
+
+
+
+    <!-- Warnhinweise -->
+    <section>
+      <h2 class="section-header">Warnhinweise</h2>
+    </section>
+    <section>
+      <p>
+        Die Nutzung dieses Chatbots erfolgt <strong>eigenverantwortlich</strong>. Antworten können fehlerhaft sein und sollten vor Einbringung im Behandlungsplan überprüft werden.
+        <br/> <br/>
+        Dieser Chatbot simuliert lediglich eine Person und ist kein realer Gesprächspartner.
+        <br/> <br/>
+        Gib <strong>niemals</strong> persönliche Informationen an den Chatbot weiter!
+      </p>
+    </section>
+
+
+
+
+    <!-- Chatbox für Chatbot-->
+    <section>
+      <h2 class="section-header">Chatfeld für Interaktion mit Chatbot</h2>
+      <p>Wähle eine Gruppe und eine Person aus und schreibe deine Nachrichten in das Chatfeld. Wenn keine Gruppen auswählbar sind, bitte der Betreuung Bescheid geben.</p>
+    </section>
+
+    <section class="group-selection-section">
+      <div class="session-indicator">
+        Aktive Session: <span id="session-display" class="session-label">(wird geladen...)</span>
+      </div>
+      <br/>
+      <div class="session-indicator">
+        Aktiver Patient:<span id="student-aktiver-patient" class="session-label">Wird geladen…</span>
+      </div>
+      <br/>
+      <div class="form-group">
+        <label for="groupSelect">Gruppe wählen:</label>
+        <select id="groupSelect" required>
+          <option value="" disabled selected>-- Gruppen werden geladen --</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="expert-selection-section hidden">
+      <div class="form-group">
+        <label for="expert">Wähle eine Fachperson:</label>
+        <select id="expert" required>
+          <option value="" disabled selected>– Fachperson auswählen –</option>
+        </select>
+      </div>
+      <div id="new-chat-notice" class="new-chat-notice"></div>
+      <br/>
+    </section>
+
+    <div id="session-control" class="session-select">
+      <label for="chatSelect">Vorhandenen Chat wählen:</label>
+      <select id="chatSelect">
+        <option value="" disabled selected>-- Keine Chats vorhanden --</option>
+      </select>
+      <br/>
+      <br/>
+      <label for="newChatInGroupButton">Neuen Chat starten:</label>
+      <button id="newChatInGroupButton">Neuer Chat</button>
+      <br/>
+      <br/>
+    </div>
+
+    <div id="chat-section" class="hidden">
+      <br/>
+      <p>Je nach Länge / Komplexität der Frage und Länge des Chatverlaufs kann es ein wenig dauern, bis der Chatbot antwortet.</p>
+      <div class="chat-container">
+        <div id="chatbox" class="chatbox"></div>
+        <form id="chat-form">
+          <textarea id="user-input" rows="4" placeholder="Schreibe hier…"></textarea>
+          <button type="submit" class="btn-chat">Senden</button>
+        </form>
+      </div>
+    </div>
+
+
+
+
+     <!-- Fehler- und Anmerkungsformular -->
+    <section>
+      <h2 class="section-header">Fehler melden</h2>
+    </section>
+    <p>
+      Wenn dir Fehler auffallen, kannst du diese hier melden. Bitte beschreibe im ersten Feld den Fehler, der dir aufgefallen ist.
+      <br/><br/>
+      Sollte der Fehler in einem bestimmten Chatverlauf aufgefallen sein, kannst du einen Ausschnitt vom Chat im zweiten Feld eingeben.
+      <br/><br/>
+      Bitte gib in diesem Fall auch die derzeitige Session, deine Gruppe und den Zeitstempel vom Chat an.
+    </p>
+    <section class="error-section">
+      <br/>
+      <form id="error-form">
+        <label for="note-text" class="note-label">Dein Kommentar</label>
+        <textarea id="note-text" name="note" class="note-textarea" rows="3" placeholder="Beschreibe den Fehler, der dir aufgefallen ist." required></textarea>
+
+        <label for="error-text" class="error-label">Fehlerhafte Chatbot-Interaktion</label>
+              <textarea id="error-text" name="error" class="error-textarea" rows="3" placeholder="Füge hier ggf. die fehlerhafte Nachricht mit ein."></textarea>
+
+        <button type="submit" class="btn-nav" id="submit-error-btn">Abschicken</button>
+        <div id="error-feedback" class="error-message" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <!-- Navigation -->
+    <section>
+      <h2 class="section-header">Navigation Admin-Menü</h2>
+    </section>
+      <p>Bitte gib das Passwort ein, um in den Admin-Bereich zu gelangen</p>
+      <br/>
+      <br/>
+    <div class="admin-button">
+ 
+      <form id="login-form" action="/login" method="POST">
+        <label for="admin-password">Passwort:</label>
+        <input type="password" id="admin-password" name="password" required />
+        <br/>
+        <div id="login-error" class="error-message" aria-live="polite"></div>
+        <br/>
+        <button type="admin-btn" class="btn-nav">Zum Admin-Menü</button>
+      </form>
+    </div>
+    <div>
+      <br/>
+      <br/>
+      <br/>
+      <p style="font-style: italic; font-size: 0.9rem">Protoypische Webanwendung. Erstellt im Zuge der Bachelor-Arbeit von Jule Engel</p>
+    </div>
+  </div>
+  <script src="student.js"></script>
+</body>
+</html>

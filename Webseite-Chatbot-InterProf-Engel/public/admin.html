@@ -1,0 +1,576 @@
+<!-- /public/admin.html -->
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot Admin-Menü</title>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <div id="notification-container"></div>
+  <div class="main-box">
+    <img src="images/logo.png" alt="Logo Ihrer Anwendung" class="site-logo">
+    <h1>Projekt Interprofessionelle Zusammenarbeit</h1>
+    <h1 class="main-title">Admin-Menü</h1>
+
+    <!-- Einleitung -->
+    <section>
+      <h2 class="section-header">Einleitung</h2>
+    </section>
+    <section>
+      <p id="admin-intro-toggle-trigger">
+        Dieser Bereich dient zur kurzen Einführung und Anleitung in die Funktionen des Chatbots und der Webanwendung. 
+        <br/>
+        <br/>
+        <strong>Bei erstmaliger Nutzung unbedingt vollständig durchlesen!</strong>
+        <br/>
+        <br/>
+        <i>Drücke dieses Feld an, um mehr Informationen ein- und auszublenden.</i>
+      </p>
+      <section id="admin-intro-toggle-section" class="hidden">
+        <br/> <br/> <br/>
+        <h2>Einleitung</h2>
+        <p>
+          Diese Webanwendung ist ein Prototyp, der im Rahmen einer Bachelor-Arbeit entwickelt wurde. Ziel ist es, die interprofessionelle Zusammenarbeit im Gesundheitswesen zu simulieren 
+          und Studierenden eine Möglichkeit zu geben, mithilfe eines Chatbots mit simulierten Fachpersonen zu interagieren. 
+          Der Chatbot erhält Kontextinformationen zur Rolle, zum Patienten sowie einen Systemprompt und gibt darauf basierend Antworten.
+        </p>
+
+        <br/>
+        <h2>Ziel und Funktionen des Admin-Menüs</h2>
+        <p>
+          Das Admin-Menü dient dazu, alle Inhalte und Datenstrukturen der Anwendung zu verwalten. Änderungen, die hier vorgenommen werden, beeinflussen unmittelbar die Funktionsweise 
+          des Chatbots. Die Inhalte werden zentral gespeichert und stehen nach dem Speichern <strong>sofort</strong> zur Verfügung.
+          <br/><br/>
+          <strong>Zu beachten:</strong> Diese Webanwendung hat keine Schutzmechanismen eingebaut und ist somit vor Angriffen nicht geschützt!
+        </p>
+
+        <br/>
+        <h2>Bereiche im Überblick</h2>
+
+        <ul>
+          <li><strong>Aktive Session & Patient:</strong> Zeigt an, welche Chat-Session und welcher Patient aktuell aktiv ist. Diese Angaben werden für alle Studierenden im Chat verwendet.</li>
+          <br/>
+          <li><strong>Neue Session starten:</strong> Hier kann eine neue Chat-Session mit Jahr und Quartal erstellt und aktiviert werden.</li>
+          <br/>
+          <li><strong>Aktiven Patienten wählen:</strong> Auswahl eines vorhandenen Patientenprofils, das dann allen Chatbots zur Verfügung steht.</li>
+          <br/>
+          <li><strong>Chatverläufe ansehen:</strong> Auswahl und Anzeige von bestehenden Chatverläufen nach Session, Gruppe und Chat. Die Inhalte können heruntergeladen werden.</li>
+          <br/>
+          <li><strong>Rollen-Prompts:</strong> Liste aller definierten Fachpersonen (Rollen). Prompts können angezeigt, bearbeitet oder gelöscht werden. Es ist möglich, neue Rollen zu erstellen.</li>
+          <br/>
+          <li><strong>System-Prompt:</strong> Hier kann die übergeordnete Systemanweisung für alle Chatbots geändert werden (z. B. Kommunikationsstil oder Verhalten).</li>
+          <br/>
+          <li><strong>Patienten-Verwaltung:</strong> Übersicht und Bearbeitungsmöglichkeit für alle Patientenprofile. Neue Patienten können erstellt, bestehende angepasst oder gelöscht werden.</li>
+          <br/>
+          <li><strong>Feedback-Meldungen:</strong> Rückmeldungen der Studierenden über die Anwendung (z. B. Fehler oder Probleme). Feedback kann als „gesehen“ markiert oder gelöscht werden.</li>
+        </ul>
+
+        <br/>
+        <h2>Hinweis zur Verantwortung</h2>
+        <p>
+          Alle Änderungen im Admin-Menü wirken sich direkt auf das Verhalten des Chatbots aus. Bitte prüfe Inhalte sorgfältig, bevor du sie speicherst oder veröffentlichst.
+          Diese Anwendung befindet sich im Prototyp-Stadium – unvollständige oder fehlerhafte Inhalte können das Verhalten des Chatbots beeinflussen.
+        </p>
+        <br/>
+        <h2>Hinweis zur erstmaligen Nutzung</h2>
+        <p>Wenn dieser Chatbot erstmalig auf einem Server aufgesetzt wird, erstellt die Datenbank automatisch Einträge für ein Rollen-Prompt, ein System-Prompt und den Patienten Karl 
+          von Hausen. Diese Einträge sind allerdings nicht vollständig (!), sondern dienen als Platzhalter.
+          Vor konkreter Nutzung des Chatbots sollten daher alle Einträge überprüft werden.
+          <br/> <br/> <strong>Wichtig:</strong> Bevor der Chatbot erstmals genutzt werden kann, müssen ein aktiver Patient und eine aktive Session gestartet werden! Falls dies
+          nicht geschieht, kann der Chatbot nicht genutzt werden. Beim Löschen eines Patienten muss beachtet werden, dass der aktive Patient neu gesetzt werden muss, wenn der
+          gelöschte Patient vorher der aktive Patient war.
+        </p>
+      </section>
+    </section>
+
+
+
+    <!-- Verwaltung Chat-Sessions -->
+    <section>
+      <h2 class="section-header">Chat-Sessions verwalten</h2>
+      <br/>
+      <p>Hier können neue Chat-Sessions gestartet und der aktive Patient eingestellt werden. Dies muss insbesondere bei erstmaliger Nutzung der Webanwendung eingestellt werden!</p>
+    </section>
+
+    <section class="session-status-section">
+      <h2>Derzeitige Chat-Session</h2>
+      <br/>
+      <div class="session-info">
+        <strong>Aktive Session:</strong>
+        <span id="current-session-label" class="session-label">Wird geladen…</span>
+      </div>
+      <div class="session-info">
+        <strong>Aktiver Patient:</strong>
+        <span id="current-patient-label" class="session-label">Wird geladen…</span>
+      </div>
+    </section>
+
+    <section class="session-create-section">
+      <h2>Neue Chat-Session starten</h2>
+      <form id="chat-session-form">
+        <div class="form-group">
+          <label for="session-jahr" class="label-input-gap">Jahr</label>
+          <br/>
+          <input type="number" id="session-jahr" placeholder="z.B. 2025" required />
+        </div>
+
+        <div class="form-group">
+          <label for="session-quartal" class="label-input-gap">Quartal</label>
+          <select id="session-quartal" required>
+            <option value="" disabled selected>– Quartal wählen –</option>
+            <option value="Q1">Q1</option>
+            <option value="Q2">Q2</option>
+            <option value="Q3">Q3</option>
+            <option value="Q4">Q4</option>
+          </select>
+        </div>
+
+        <div class="button-group">
+          <button type="submit" class="btn-nav">Session starten</button>
+        </div>
+
+        <div id="session-feedback" class="error-message"></div>
+      </form>
+    </section>
+
+    <section class="prompt-edit-form">
+      <h2>Aktiven Patienten wählen</h2>
+      <form id="set-active-patient-form">
+        <div class="form-group">
+          <label for="active-patient-select" class="label-input-gap">Patient auswählen</label>
+          <select id="active-patient-select">
+            <option value="" disabled selected>– Patient auswählen –</option>
+          </select>
+        </div>
+        <div class="button-group">
+          <button type="submit" class="btn-nav">Als aktiv setzen</button>
+        </div>
+        <div id="active-patient-feedback" class="error-message"></div>
+      </form>
+    </section>
+
+
+
+    <!-- Anzeige Chatverläufe -->
+    <section>
+      <h2 class="section-header">Chatverläufe ansehen</h2>
+      <br/>
+      <p> Wähle bitte Session, Gruppe und Chat nacheinander aus, um Chatverläufe einsehen zu können. Die Chatverläufe können bei Bedarf heruntergeladen werden. </p>
+      <br/>
+      <div class="form-group centered-form-group">
+        <label for="admin-session-select">Session wählen:</label>
+        <select id="admin-session-select">
+          <option value="" disabled selected>– Session auswählen –</option>
+        </select>
+      </div>
+
+      <div class="form-group centered-form-group">
+        <label for="admin-group-select">Gruppe wählen:</label>
+        <select id="admin-group-select">
+          <option value="" disabled selected>– Gruppe auswählen –</option>
+        </select>
+      </div>
+
+      <div class="form-group centered-form-group">
+        <label for="admin-chat-select">Chat auswählen:</label>
+        <select id="admin-chat-select">
+          <option value="" disabled selected>– Chat auswählen –</option>
+        </select>
+      </div>
+
+      <div id="admin-chat-section" class="hidden">
+        <div class="chat-container">
+          <div id="admin-chatbox" class="chatbox"></div>
+        </div>
+        <br/>
+        <div class="button-group">
+          <button id="download-chat-btn" class="btn-nav">Chatverlauf herunterladen</button>
+          <button id="close-chat-btn" class="btn-nav">Chatfenster schließen</button>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- Verwaltung Rollen-Prompts -->
+    <section>
+      <h2 class="section-header">Rollen-Prompts</h2>
+      <br/>
+      <p>Rollen-Prompts sind Personenbeschreibungen für die Personen, die der Chatbot simulieren soll.
+        <br/><br/>
+        Im Template für Rollen-Prompts kann ein beispielhafter Aufbau eines Rollen-Prompts angesehen werden.
+      </p>
+    </section>
+
+    <section class="prompt-list-form">
+      <h2>Templates für Rollen-Prompts</h2>
+      <section>
+        <i id="admin-role-prompt-trigger">
+          Klicke hier, um ein Template für Rollen-Prompts anzuzeigen
+        </i>
+
+        <section id="admin-role-prompt-toggle-section" class="hidden prompt-template-text">
+          <br/>
+          <h3>Rollen-Schlüssel</h3>
+          <p><i>Der Rollenschlüssel dient der Anzeige bei Chatverläufen und sollte das Fachgebiet klein geschrieben und ohne Umlaute darstellen</i></p>
+          <p> ergotherapie</p>
+          <br/>
+          <h3>Fachgebiet</h3>
+          <p> Ergotherapie</p>
+          <br/>
+          <h3>Name</h3>
+          <p>Julia Müller</p>
+          <br/>
+          <h3>Rollen-Beschreibung</h3>
+          <p>TODO Rollen-Beschreibung</p>
+        </section>
+      </section>
+    </section>
+
+    <section class="prompt-list-form">
+      <h2>Verfügbare Rollen-Prompts</h2>
+      <i>Zum Einblenden weiterer Informationen Prompt anklicken</i>
+      <br/>
+      <div id="role-prompts-container"></div>
+    </section>
+
+    <section class="prompt-edit-form">
+      <h2>Rolle bearbeiten</h2>
+      <form id="role-prompt-edit-form">
+        <div class="form-group">
+          <label for="edit-role" class="label-input-gap">Auswahl Rolle</label>
+          <select id="role-edit-role" name="role" required>
+            <option value="" disabled selected>– Rolle auswählen –</option>
+          </select>
+        </div>
+        <br/>
+        <div id="role-edit-fields" class="fields-collapsed">
+          <div class="form-group">
+            <label for="role-edit-displayRolle" class="label-input-gap">Fachgebiet</label>
+            <input type="text" id="role-edit-displayRolle" name="displayRolle" required />
+          </div>
+          <br/>
+          <div class="form-group">
+            <label for="role-edit-displayName" class="label-input-gap">Name der Person</label>
+            <input type="text" id="role-edit-displayName" name="displayName" required />
+          </div>
+          <br/>
+          <div class="form-group">
+            <label for="role-edit-promptText" class="label-input-gap">Rollen-Beschreibung</label>
+            <textarea id="role-edit-promptText" name="promptText" rows="10" required></textarea>
+          </div>
+          <div class="button-group edit-button-group">
+            <button type="submit" class="btn-nav">Speichern</button>
+            <button type="button" id="role-delete-prompt-btn" class="btn-nav">Löschen</button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <section class="prompt-create-form">
+      <h2>Neue Rolle erstellen</h2>
+      <div class="main-page-button">
+        <button id="show-role-create-btn" class="btn-nav">Rolle erstellen</button>
+        <br/>
+        <div id="role-create-warning" class="error-message hidden"></div>
+      </div>
+      <form id="role-prompt-create-form" class="fields-collapsed">
+        <div class="form-group">
+          <label for="role-create-role" class="label-input-gap">Rollen-Schlüssel</label>
+          <input type="text" placeholder="logopaede" id="role-create-role" name="role" required />
+        </div>
+        <br/>
+        <div class="form-group">
+          <label for="role-create-displayRolle" class="label-input-gap">Fachgebiet</label>
+          <input type="text" placeholder="Logopäde" id="role-create-displayRolle" name="displayRolle" required />
+        </div>
+        <br/>
+        <div class="form-group">
+          <label for="role-create-displayName" class="label-input-gap">Name der Person</label>
+          <input type="text" placeholder="Lena Müller" id="role-create-displayName" name="displayName" required />
+        </div>
+        <br/>
+        <div class="form-group">
+          <label for="role-create-promptText" class="label-input-gap">Prompt-Text</label>
+          <textarea id="role-create-promptText" placeholder="Ausführliche Beschreibung der Person." name="promptText" rows="3" required></textarea>
+        </div>
+        <div class="button-group">
+          <button type="submit" class="btn-nav">Erstellen</button>
+        </div>
+      </form>
+    </section>
+
+
+
+    <!-- Verwaltung System-Prompts -->
+    <section>
+      <h2 class="section-header">System-Prompt</h2>
+      <br/>
+      <p>Der System-Prompt enthält alle Anforderungen, die an den Chatbot gestellt werden. Dies umfasst sein allgemeines Verhalten, verbotene Antworten, etc.
+        <br/><br/>
+        Im Template für System-Prompts kann ein beispielhafter Aufbau eines System-Prompts angesehen werden.
+      </p>
+    </section>
+
+    <section class="prompt-list-form">
+      <h2>Templates für System-Prompts</h2>
+      <section>
+        <i id="admin-system-prompt-trigger">
+          Klicke hier, um ein Template für System-Prompts anzuzeigen
+        </i>
+
+        <section id="admin-system-prompt-toggle-section" class="hidden prompt-template-text">
+          <br/>
+          <h3>System-Prompt</h3>
+          <p> TODO: System-Prompt Template </p>
+        </section>
+      </section>
+    </section>
+
+    <section class="prompt-list-form">
+      <h2>Derzeitiger System-Prompt</h2>
+      <div id="system-prompts-container"></div>
+      <div class="main-page-button">
+        <button id="system-edit-btn" class="btn-nav">Bearbeiten</button>
+      </div>
+      <form id="system-prompt-edit-form">
+        <div id="system-edit-fields" class="fields-collapsed">
+          <div class="form-group">
+            <label for="system-edit-promptText" class="label-input-gap">Prompt-Beschreibung</label>
+            <textarea id="system-edit-promptText" name="promptText" placeholder="Ausführliche Anweisungen für den Chatbot" rows="10" required></textarea>
+          </div>
+          <div class="button-group edit-button-group">
+            <button type="submit" class="btn-nav">Speichern</button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+
+
+    <!-- Verwaltung Patienten -->
+    <section>
+      <h2 class="section-header">Patienten-Verwaltung</h2>
+      <br/>
+      <p>In der Patientenverwaltung können Patienten angelegt, bearbeitet und gelöscht werden.
+        <br/><br/>
+        Im Template für Patienten kann ein beispielhafter Aufbau eines Patienten angesehen werden.
+      </p>
+    </section>
+
+    <section class="prompt-list-form">
+      <h2>Templates Patienten</h2>
+      <section>
+        <i id="admin-patient-prompt-trigger">
+          Klicke hier, um ein Template für Patienten anzuzeigen
+        </i>
+
+        <section id="admin-patient-prompt-toggle-section" class="hidden prompt-template-text">
+          <br/>
+          <h3>Handlungsempfehlungen</h3>
+          <p>
+            Um die Patienteninformationen dem Chatbot zu übermitteln, müssen diese in reiner Textform vorliegen. Formate wie PDF oder PPTX (PowerPoint-Präsentation) werden in dem Prototypen nicht unterstützt. Auch Tabellen sollten in Textform übertragen werden, um Probleme bei der Verarbeitung durch falsche Formatierungen zu vermeiden.
+            <br/><br/>
+            Die Unterteilung der Patienteninformationen in „Hintergrundinformationen“, „Arztbrief“, „Laborbericht“ und „Überleitungsbogen“ hat sich als sinnvoll erwiesen und sollte so beibehalten werden.
+            <br/><br/>
+            Da Chatbots in der Lage sind, natürliche Sprache schnell und effizient zu verarbeiten, müssen die Patienteninformationen nicht in eine gesonderte Form übertragen werden. Strukturiert Formate wie XML und JSON haben keine deutlichen Verbesserungen beim Chatbot bewirkt. Zudem sind Fließtexte für die meisten Nutzer besser zu verstehen und zu bearbeiten.
+          </p>
+          <br/>
+          <br/>
+          <h3>Beispielpatient: Karl von Hausen</h3>
+          <h4>Patienten-Name</h4>
+          <p>Karl von Hausen </p>
+          <br>
+          <h4>Hintergrundinformationen</h4>
+          <p> 
+            Karl von Hausen ist ein 58-jähriger verheirateter Mann, der als Bauleiter in Vollzeit tätig war. Gemeinsam mit seiner Ehefrau, die in einem 60%-Teilzeitpensum arbeitet, lebt er in einem kleinen Einfamilienhaus, das abgelegen am Stadtrand von Musterhausen liegt. Das Ehepaar hat zwei erwachsene Kinder, die im Ausland leben.
+            <br/><br/>
+            Aktuell befindet sich Herr von Hausen in neurologischer Rehabilitation, nachdem er infolge eines Fahrradsturzes eine Hirnblutung erlitten hat. Der Rehabilitationsverlauf ist durch verschiedene medizinische und pflegerische Herausforderungen geprägt. Dazu zählen eine bestehende Sprachstörung, eine dezente Schluckstörung sowie eine rechtsseitige Hemiplegie. Die Urinableitung erfolgt über eine Bauchdeckenfistel. Herr von Hausen leidet außerdem an Übergewicht.
+          </p>
+          <br/>
+          <h4>Arztbrief</h4>
+          <p>
+            Patient: von Hausen, Karl geb. 03.03.1964<br/>
+            Wohnort: whft. in 12300 Musterhausen, Am Stadtrand 1<br/><br/>
+
+            Nachfolgend berichten wir über oben genannten Patienten, der sich vom 13.2.2025 bis zum 10.3.2025 in unserer stationären Behandlung befand.<br/><br/>
+
+            Hauptdiagnose:<br/>
+            SHT (S06.72)<br/>
+            <b>...</b> <br/>
+          </p>
+          <br/>
+          <h4>Laborbericht</h4>
+          <p>
+            Auftragsnummer: 302270<br/>  
+            Fallnummer: 812974<br/>  
+            Methode: Ergebnis – Einheit – Normbereich<br/><br/>
+
+            Blutbild<br/>  
+            Hämoglobin: 8.0 – mmol/l – 8.7–10.9<br/>  
+            Hämatokrit: 0.38 – l/l – 0.40–0.52<br/>  
+            Leukozyten: 14.4 – Gpt/l – 4.4–11.3<br/>  
+            Thrombozyten: 245 – Gpt/l – 150–400<br/>  
+            Erythrozyten: 4.12 – Tpt/l – 4.30–5.90<br/>  
+            NRBC% (Erythroblasten): &lt;1 – % – 0–0<br/>  
+            MCHC: 21.1 – mmol/l – 20.0–22.0<br/>  
+            MCH: 1.94 – fmol – 1.70–2.00<br/>  
+            MCV: 92.0 – fl – 80.0–96.0<br/>  
+            RDW: 14.0 – % – 11.0–17.0<br/>
+            <b>...</b> <br/>
+          </p>
+          <br/>
+          <h4>Überleitungsbogen</h4>
+          <p>
+            Karl von Hausen<br/>
+            geb.: 03.03.1964<br/>
+            Am Stadtrand 1,<br/>
+            12300 Musterhausen<br/><br/>
+
+            Einschränkung/Schädigung, die die tägliche Lebensführung und Aktivität in besonderem Masse beeinträchtigen (Warum wird personelle Hilfe benötigt?): Hemiplegie re.<br/><br/>
+
+            Handelt es sich um einen Dauerzustand? (voraussichtlich länger als 6 Monate): JA<br/><br/>
+
+            Pflegebedingte Diagnose/n (Text, ggf. ICD): Eingeschränkte verbale Kommunikation (00051), Beeinträchtigte körperliche Mobilität (00085), Harninkontinenz (00018), Risiko für Aspiration (00039), Verminderte Belastbarkeit (00093), Chronische Schmerzen (00133), Selbstversorgungsdefizit in den Bereichen: Essen (00102), Körperpflege (00108), Ankleiden (00109), Toilettengang (00103)<br/><br/>
+
+            Ärztliche Diagnosen: Hauptdiagnose: Schädel-Hirn-Trauma (SHT) Hemiplegie re.<br/>
+            Nebendiagnosen: Adipositas Grad III, Herzinsuffizienz, Dysphagie<br/>
+            <b>...</b> <br/>
+          </p>
+        </section>
+      </section>
+    </section>
+
+    <section class="prompt-list-form">
+      <h2>Vorhandene Patienten</h2>
+      <i>Zum Einblenden weiterer Informationen Patienten anklicken</i>
+      <br/>
+      <div id="patient-list-container"></div>
+    </section>
+
+    <section class="prompt-edit-form">
+      <h2>Patienten bearbeiten</h2>
+      <div class="form-group">
+        <label for="edit-patient-select" class="label-input-gap">Patienten auswählen</label>
+        <select id="edit-patient-select">
+          <option value="" disabled selected>– Patienten auswählen –</option>
+        </select>
+      </div>
+      <br/>
+      <form id="patient-edit-form" class="fields-collapsed">
+        <input type="hidden" id="edit-patient-id" />
+        <div class="form-group">
+          <label for="edit-patient-name" class="label-input-gap">Name</label>
+          <input type="text" placeholder="Karl von Hausen" id="edit-patient-name" required />
+        </div>
+        <br/>
+        <div class="form-group">
+          <label for="edit-patient-hintergrund" class="label-input-gap">Hintergrundinformationen</label>
+          <textarea id="edit-patient-hintergrund" placeholder="Alle Informationen zum Patienten-Hintergrund" rows="10" required></textarea>
+        </div>
+        <br/>
+        <div class="form-group">
+          <label for="edit-patient-arztbrief" class="label-input-gap">Arztbrief</label>
+          <textarea id="edit-patient-arztbrief" placeholder="Alle Informationen aus dem Arztbrief" rows="10" required></textarea>
+        </div>
+        <br/>
+        <div class="form-group">
+          <label for="edit-patient-laborbericht" class="label-input-gap">Laborbericht</label>
+          <textarea id="edit-patient-laborbericht" placeholder="Alle Informationen aus dem Laborbericht" rows="10" required></textarea>
+        </div>
+        <br/>
+        <div class="form-group">
+          <label for="edit-patient-ueberleitungsbogen" class="label-input-gap">Überleitungsbogen</label>
+          <textarea id="edit-patient-ueberleitungsbogen" placeholder="Alle Informationen aus dem Überleitungsbogen" rows="10" required></textarea>
+        </div>
+        <div class="button-group edit-button-group">
+          <button type="submit" class="btn-nav">Speichern</button>
+          <button type="button" id="patient-delete-btn" class="btn-nav">Löschen</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="prompt-create-form">
+      <h2>Neuen Patienten erstellen</h2>
+      <div class="main-page-button">
+        <button id="show-patient-create-btn" class="btn-nav">Patienten erstellen</button>
+        <br/>
+        <div id="patient-create-warning" class="error-message hidden"></div>
+      </div>
+      <form id="patient-create-form" class="fields-collapsed">
+        <div class="form-group">
+          <label for="new-patient-name" class="label-input-gap">Name</label>
+          <input type="text" placeholder="Karl von Hausen" id="new-patient-name" required />
+        </div>
+        <br/>
+        <div class="form-group">
+          <label for="new-patient-hintergrund" class="label-input-gap">Hintergrundinformationen</label>
+          <textarea id="new-patient-hintergrund" placeholder="Alle Informationen zum Patienten-Hintergrund" rows="3" required></textarea>
+        </div>
+        <br/>
+        <div class="form-group">
+          <label for="new-patient-arztbrief" class="label-input-gap">Arztbrief</label>
+          <textarea id="new-patient-arztbrief" placeholder="Alle Informationen aus dem Arztbrief" rows="3" required></textarea>
+        </div>
+        <br/>
+        <div class="form-group">
+          <label for="new-patient-laborbericht" class="label-input-gap">Laborbericht</label>
+          <textarea id="new-patient-laborbericht" placeholder="Alle Informationen aus dem Laborbericht" rows="3" required></textarea>
+        </div>
+        <br/>
+        <div class="form-group">
+          <label for="new-patient-ueberleitungsbogen" class="label-input-gap">Überleitungsbogen</label>
+          <textarea id="new-patient-ueberleitungsbogen" placeholder="Alle Informationen aus dem Überleitungsbogen" rows="3" required></textarea>
+        </div>
+        <div class="button-group">
+          <button type="submit" class="btn-nav">Erstellen</button>
+        </div>
+      </form>
+    </section>
+
+
+
+    <!-- Verwaltung Fehlermeldungen -->
+    <section>
+      <h2 class="section-header">Fehlermeldungen</h2>
+      <br/>
+      <p>Hier können Meldungen von Studierenden angezeigt und gelöscht werden.</p>
+    </section>
+    <section class="feedback-section" id="feedback-container"></section>
+
+
+
+    <!-- Navigation -->
+    <section>
+      <h2 class="section-header">Zur Hauptseite zurückkehren</h2>
+    </section>
+    <div class="main-page-button">
+      <button id="main-page-btn" class="btn-nav">Zur Hauptseite</button>
+    </div>
+
+    <div>
+      <br/>
+      <br/>
+      <p style="font-style: italic; font-size: 0.9rem">Protoypische Webanwendung. Erstellt im Zuge der Bachelor-Arbeit von Jule Engel</p>
+    </div>
+  </div>
+
+
+
+  <!-- Bestätigungs-Modal -->
+  <div id="confirm-modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-box">
+      <p id="confirm-text">Soll dieser Prompt wirklich gelöscht werden?</p>
+      <div class="modal-buttons">
+        <button id="confirm-yes" class="btn-delete">Löschen</button>
+        <button id="confirm-no" class="btn-nav">Abbrechen</button>
+      </div>
+    </div>
+  </div>
+  <script src="admin.js"></script>
+</body>
+</html>

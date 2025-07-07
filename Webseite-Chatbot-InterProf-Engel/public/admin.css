@@ -1,0 +1,641 @@
+/* public/admin.css */
+
+/* ===============================================
+   1. Globales Layout
+   =============================================== */
+
+body {
+  margin: 0;
+  height: 100vh;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  font-family: Arial, sans-serif;
+}
+
+.main-box {
+  width: 100%;
+  max-width: 1600px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.main-box section {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  box-sizing: border-box;
+}
+
+.section-header {
+  background-color: #ebebeb;
+  border-left: 10px solid #353535;
+  padding: 1rem 1rem 1rem 1.5rem;
+  margin: 3rem 0 1.5rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #000000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+@media (max-width: 1000px) {
+  .main-box {
+    padding: 10px;
+  }
+
+  .prompt-list-form,
+  .prompt-edit-form,
+  .prompt-create-form,
+  .chat-history-section {
+    min-width: unset;
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .prompt-list-form,
+  .prompt-edit-form,
+  .prompt-create-form,
+  .chat-history-section {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 1600px) {
+  .main-box {
+    width: 90%;
+  }
+}
+
+
+/* ===============================================
+   2. Typografie
+   =============================================== */
+
+.main-box section h1 {
+  text-align: center;
+}
+
+.main-box section h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.main-box section p {
+  text-align: center;
+  margin: 0.5rem 0;
+  line-height: 1.4;
+}
+
+.main-box section i {
+  display: block;
+  text-align: center;
+  margin: 0.5rem 0;
+  line-height: 1.4;
+}
+
+.main-title {
+  text-align: center;
+  margin: 1rem 0;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+
+/* ===============================================
+   3. Button-Handler
+   =============================================== */
+
+.main-page-button {
+  width: 100%;
+  max-width: 1000px;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.main-page-button h2 {
+  margin-bottom: 0.5rem;
+}
+
+.main-page-button .btn-nav {
+  padding: 8px 16px;
+  background-color: #f0f0f0;
+  border: 1px solid #000;
+  color: #000;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.main-page-button .btn-nav:hover {
+  background-color: #e0e0e0;
+}
+
+.edit-button-group {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.prompt-edit-form .button-group,
+.prompt-create-form .button-group {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.button-group .btn-nav {
+  min-width: 120px;
+  font-size: 15px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.btn-delete {
+  padding: 8px 16px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-delete:hover {
+  background-color: #c82333;
+}
+
+/* ===============================================
+   4. Prompt-Bearbeitung
+   =============================================== */
+
+/* Sektionen mit Überschrift */
+.prompt-list-form h2,
+.prompt-edit-form h2,
+.prompt-template-text h3,
+.prompt-template-text h4,
+.prompt-create-form h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.prompt-template-text i {
+  font-size: 0.9em;
+}
+
+#role-prompts-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.prompt {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.prompt h3 {
+  margin: 0 0 6px;
+  font-size: 1.1rem;
+}
+
+.prompt h4 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.prompt p{
+  margin: 0;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.prompt .prompt-text {
+  display: none;
+  margin-top: 0.5rem;
+  white-space: pre-wrap;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.prompt.expanded .prompt-text {
+  display: block;
+}
+
+.prompt-text strong {
+  display: block;
+  font-weight: bold;
+  color: #333;
+}
+
+.prompt-text br + strong {
+  display: block;
+  margin-top: 1rem;
+}
+
+.prompt-edit-form .form-group,
+.prompt-create-form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.prompt-edit-form input,
+.prompt-edit-form textarea,
+.prompt-edit-form select,
+.prompt-create-form input,
+.prompt-create-form textarea,
+.prompt-list-form textarea {
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+  box-sizing: border-box;
+  width: 100%;
+  resize:vertical;
+}
+
+.prompt-edit-form select {
+  background-color: #fff;
+}
+
+.prompt-list-form,
+.prompt-edit-form,
+.prompt-create-form,
+.chat-history-section,
+.feedback-section {
+  width: 100%;
+  max-width: 1300px;
+  min-width: 600px;
+  padding: 1.5rem;
+  margin: 2rem auto;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+textarea#role-edit-promptText,
+textarea#role-create-promptText,
+textarea#system-edit-promptText {
+  resize: vertical;
+  white-space: pre-wrap;
+}
+
+/* ===============================================
+   5. Chat-Verläufe
+   =============================================== */
+
+.chat-history-section {
+  text-align: center;     
+}
+
+.chat-history-section label,
+.chat-history-section select {
+  display: inline-block;    
+  margin: 0.5rem auto;         
+}
+
+.chatbox {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.chat-container {
+  width: 90%;
+  max-width: 1400px;
+  height: calc(100vh - 100px);
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#admin-chatbox {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+  border: 2px solid #ccc;       
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.chat-message {
+  display: block;
+  max-width: 85%;
+  padding: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  word-wrap: break-word;
+}
+
+.chat-message.user {
+  margin-left: auto;
+  background-color: #f5f4f4;
+  border-color: #ddd;
+  text-align: left;
+}
+
+.chat-message.bot {
+  margin-right: auto;
+  background-color: #e0e0e0;
+  border-color: #ccc;
+  text-align: left;
+}
+
+.message-header {
+  margin-bottom: 0.25rem;
+  font-weight: bold;
+}
+
+.message-body {
+  margin: 0;
+}
+
+.chat-system-message {
+  text-align: center;
+  margin: 1rem auto;
+  color: #666;
+  font-size: 0.95rem;
+  font-style: italic;
+  white-space: pre-wrap;
+}
+
+.chat-system-message .system-text {
+  display: inline-block;
+  background: none;
+  padding: 0.5rem;
+}
+
+
+/* ===============================================
+   6. Fehlermeldungen
+   =============================================== */
+
+
+.admin-fehler-box {
+  max-width: 1000px;
+  margin: 2rem auto;
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.admin-fehler-box h2 {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.fehler-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.fehler-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fehler-number {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.fehler-text {
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.anmerkung-text {
+  font-size: 0.9rem;
+  color: #666;
+  font-style: italic;
+}
+
+.fehler-loeschen-button {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border: none;
+  margin-left: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.fehler-seen-button {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  color: #000;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.fehler-seen-button:hover {
+  background-color: #e0e0e0;
+}
+
+.fehler-loeschen-button:hover {
+  background-color: #c9302c;
+}
+
+/* ===============================================
+   9. Session-Verwaltung
+   =============================================== */
+
+.session-status-section {
+  width: 100%;
+  max-width: 1300px;
+  margin: 2rem auto;
+  padding: 1rem;
+  text-align: center;
+  background-color: #fdfdfd;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.session-info {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+
+.session-label {
+  font-style: italic;
+  color: #555;
+  margin-left: 0.5rem;
+}
+
+.session-create-section {
+  width: 100%;
+  max-width: 1300px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #fdfdfd;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.session-create-section h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.session-create-section .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.session-create-section input,
+.session-create-section select {
+  padding: 0.6rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.session-create-section .button-group {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+
+/* ===============================================
+   8. Hilfsfunktionen
+   =============================================== */
+
+.fields-collapsed {
+  display: none;
+}
+
+.toggle-hint {
+  font-style: italic;
+  color: #666;
+  margin-bottom: 0.5em;
+  cursor: pointer;
+}
+
+#notification-container {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 1000;
+}
+
+.notification {
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: bold;
+  animation: slide-in 0.3s ease-out;
+}
+
+.notification.success { background-color: #28a745; }
+.notification.error   { background-color: #dc3545; }
+.notification.info    { background-color: #007bff; }
+
+@keyframes slide-in {
+  from { opacity: 0; transform: translateX(100%); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.5);
+}
+
+.modal-box {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  max-width: 90%;
+  width: 300px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.modal.hidden {
+  display: none;
+}
+.modal {
+  display: block;
+  z-index: 1000;
+}
+
+#confirm-text {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.error-message {
+  color: red;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.centered-form-group label,
+.centered-form-group select {
+  display: block;
+  margin: 0.5rem auto;
+  text-align: center;
+}
+
+.label-input-gap {
+  margin-bottom: 0.5rem;
+}
