@@ -36,15 +36,14 @@ muss VOR erstmaligem Starten des Servers in die .env-Datei eingetragen werden (s
   	
     b.	Lokal entpacken
   	
-    c.	Den entpackten Ordner an den finalen Speicherort bewegen <br/>
-    - Bei der Ordnerstruktur darauf achten, dass im Oberordner bereits die server.js liegt. Wenn durch das Entpacken ein zusätzlicher Oberordner erstellt wird, kann dieser gelöscht und nur der Unterordner verwendet werden<br/>
-    -	Korrekte Ordnerstruktur: ChatbotInterprofessionelleZusammenarbeit/Projektunterordner<br/>
-    -	Falsche Ordnerstruktur: ChatbotInterprofessionelleZusammenarbeit/ ChatbotInterprofessionelleZusammenarbeit /Projektunterordner
+    c.	Den entpackten Ordner an den finalen Speicherort bewegen
 
 3.	Anpassungen am Projekt
   	
     a.	.env-Datei bearbeiten <br/>
-      - In der .env-Datei den API-Schlüssel für OpenAI unter OPENAI_API_KEY einfügen.
+      - Bearbeitung über normalen Text-Editor möglich <br/>
+      - In der .env-Datei den API-Schlüssel für OpenAI unter OPENAI_API_KEY einfügen. <br/>
+      - Bearbeitung speichern
         
     b.	Ggf. Port ändern -> grundlegend erst einmal LocalHost 3000
 
@@ -52,13 +51,14 @@ muss VOR erstmaligem Starten des Servers in die .env-Datei eingetragen werden (s
 4.	Konsole / Eingabeaufforderung öffnen
    
     a.	Ordner navigieren (z.B. Windows cd pfad/zum/projekt)<br/>
-    - Der Pfad kann kopiert werden, indem beim Ordner des Projektes mit Rechtsklick -> „Als Pfad kopieren“ ausgewählt wird<br/>
-    - In der Konsole dann cd und den kopierten Pfad eingeben
+    - Bei der Ordnerstruktur darauf achten, dass der Pfad zum Ordner mit der server.js führt -> z.B. pfad/ ChatbotInterprofessionelleZusammenarbeitBAEngel-main\Webseite-Chatbot-InterProf-Engel<br/>
+         -> Der Pfad kann kopiert werden, indem beim Ordner des Projektes mit Rechtsklick -> „Als Pfad kopieren“ ausgewählt wird <br/>
+    - In der Konsole dann cd und den kopierten Pfad eingeben <br/>
       
     b.	Abhängigkeiten vom Projekt über den Node Package Manager installieren<br/>
      - In der Konsole eingeben: npm install<br/>
         1.	Darauf achten, dass der korrekte Ordner ausgewählt ist im Pfad<br/>
-           - Ordnerpfad muss zu Ordner mit package.json führen
+           - Ordnerpfad muss zu Ordner mit server.js und package.json führen
         2.	Die Installation der Module kann je nach Rechner ein wenig dauern<br/>
            - Am Ende steht in der Konsole eine Nachricht wie<br/>
           	      „added 142 packages, and audited 143 packages in 13s<br/>
