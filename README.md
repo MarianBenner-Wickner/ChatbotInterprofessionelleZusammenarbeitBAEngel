@@ -30,7 +30,7 @@ muss VOR erstmaligem Starten des Servers in die .env-Datei eingetragen werden (s
   	
     b.	Installationsdatei öffnen und Programm installieren
 
-2.	Projekt herunterladen (Link)
+2.	Projekt herunterladen (hier auf GitHub)
    
     a.	Am besten als Zip herunterladen
   	
