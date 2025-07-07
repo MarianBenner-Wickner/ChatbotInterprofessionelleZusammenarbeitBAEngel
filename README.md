@@ -32,9 +32,9 @@ muss VOR erstmaligem Starten des Servers in die .env-Datei eingetragen werden (s
 
 2.	Projekt herunterladen (hier auf GitHub)
    
-    a.	Am besten als Zip herunterladen
+    a.	Am besten als Zip herunterladen -> auf grünen Button <Code> drücken (oberer rechter Bereich) und dann "Download ZIP"
   	
-    b.	Lokal entpacken
+    b.	Lokal entpacken (Rechtsklick auf Ordner und "Alle Extrahieren")
   	
     c.	Den entpackten Ordner an den finalen Speicherort bewegen
 
