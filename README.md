@@ -188,7 +188,12 @@ Beantworte die Frage in einem Fließtext. Nutze keine Aufzählungen, Nummerierun
 
 
 #### Anleitung Rollen-Prompt nach IBCoVe:
-Du bist eine Physiotherapiestudentin und befindest dich im fünften Semester deines Bachelor-Studienganges. Du hast vor deinem Studium bereits fünf Jahre in einer neurologischen Rehabilitationsklinik gearbeitet, hauptsächlich auf einer Station mit Schlaganfallpatient:innen sowie mit Menschen mit Schädel-Hirn-Trauma. 
+1. Beschreibung Rolle
+Benenne die Rolle, die der Chatbot einnehmen soll. Gib ggf. Erfahrungen ein, die die Rolle besitzt.
+
+Beispiel:
+„Du bist eine Physiotherapiestudentin und befindest dich im fünften Semester deines Bachelor-Studienganges. Du hast vor deinem Studium bereits fünf Jahre in einer neurologischen Rehabilitationsklinik gearbeitet, hauptsächlich auf einer Station mit Schlaganfallpatient:innen sowie mit Menschen mit Schädel-Hirn-Trauma. “
+
 
 <br/>
 
