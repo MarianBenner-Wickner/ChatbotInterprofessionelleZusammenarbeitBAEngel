@@ -42,13 +42,11 @@ muss VOR erstmaligem Starten des Servers in die .env-Datei eingetragen werden (s
     -	Falsche Ordnerstruktur: ChatbotInterprofessionelleZusammenarbeit/ ChatbotInterprofessionelleZusammenarbeit /Projektunterordner
 
 3.	Anpassungen am Projekt
-   
-    a.	WICHTIG: Im Ordner die .env.example in .env umbenennen
   	
-    b.	.env-Datei bearbeiten <br/>
+    a.	.env-Datei bearbeiten <br/>
       - In der .env-Datei den API-Schlüssel für OpenAI unter OPENAI_API_KEY einfügen.
         
-    c.	Ggf. Port ändern -> grundlegend erst einmal LocalHost 3000
+    b.	Ggf. Port ändern -> grundlegend erst einmal LocalHost 3000
 
   	
 4.	Konsole / Eingabeaufforderung öffnen
