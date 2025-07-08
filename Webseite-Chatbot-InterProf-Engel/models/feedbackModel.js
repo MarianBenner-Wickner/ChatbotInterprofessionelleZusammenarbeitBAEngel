@@ -7,7 +7,7 @@ module.exports = {
   // Feedback speichern
   saveFeedback({ comment, chatProof }) {
     const timestamp = new Date().toLocaleString('sv-SE', {
-      timeZone: 'Europe/Berlin',
+      timeZone: 'UTC',
       hour12: false
     }).replace('T', ' ');
 
