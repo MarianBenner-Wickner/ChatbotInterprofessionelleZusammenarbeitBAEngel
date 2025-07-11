@@ -24,7 +24,7 @@ muss VOR erstmaligem Starten des Servers in die .env-Datei eingetragen werden (s
 <br/>
 
 ## Anleitung Installation auf lokalem Gerät:
-1.	Node.js auf Rechner installieren (https://nodejs.org)
+1.	Node.js auf Rechner installieren (https://nodejs.org/en/download)
 
     a.	Auf Seite -> Install Node.js klicken -> Je nach Betriebssystem den Installer herunterladen (z.B. Windows -> Windows Installer (.msi))
   	
