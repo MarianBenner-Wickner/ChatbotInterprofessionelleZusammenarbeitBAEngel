@@ -522,7 +522,7 @@ chatForm.addEventListener('submit', async e => {
   tempMsgEl.classList.add('chat-message', 'bot', 'typing-indicator');
   tempMsgEl.innerHTML = `
     <div class="message-header">${currentRoleDisplayName || 'Unbekannte Rolle'}</div>
-    <div class="message-body"><i>schreibt …</i></div>
+    <div class="message-body"><i>schreibt gerade. Bitte KEINE weitere Nachricht abschicken, bis du eine Antwort erhalten hast!</i></div>
   `;
   chatBox.appendChild(tempMsgEl);
   chatBox.scrollTop = chatBox.scrollHeight;
