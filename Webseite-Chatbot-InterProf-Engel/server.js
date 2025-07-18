@@ -1,10 +1,6 @@
 // server.js
 
-
-/* ===============================================
-   1. Element-Referenzen und Initialisierung
-   =============================================== */
-
+// Element-Referenzen und Initialisierung
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -25,20 +21,12 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 
-
-/* ===============================================
-   2. Middleware für Session-Verwaltung initialisieren
-   =============================================== */
-
+//Middleware für Session-Verwaltung initialisieren
 app.use(sessionMiddleware);
 app.use(bodyParser.json());
 
 
-
-/* ===============================================
-   3. Routen definieren
-   =============================================== */
-
+//Routen definieren
 app.use('/', authRoutes);
 app.use('/admin.html', requireAdmin);
 app.use('/', staticRoutes);
@@ -51,11 +39,7 @@ app.use('/api', chatSessionRoutes);
 app.use('/api/openai', openAIRoutes);
 
 
-
-/* ===============================================
-   4. Server-Start 
-   =============================================== */
-
+//Server-Start 
 app.listen(PORT, () => {
   console.log(`Server läuft auf http://localhost:${PORT}`);
 });
