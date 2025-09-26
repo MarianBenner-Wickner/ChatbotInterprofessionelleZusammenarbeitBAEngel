@@ -3,7 +3,8 @@
 require('dotenv').config();
 const OpenAI = require("openai");
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
+  apiKey: process.env.OPENAI_API_KEY,
+  baseURL: process.env.CUSTOM_BASE_URL
 });
 const chatSessionModel = require('../models/chatSessionModel');
 
@@ -86,3 +87,4 @@ async function handleUserMessage({ chatId, roleId, role, message, nutzerNachrich
 }
 
 module.exports = { handleUserMessage };
+
